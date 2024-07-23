@@ -98,57 +98,173 @@ tao-agent/
 ## 3. Configuration
 
 3.1. Create `config/sample_config.yaml` with the following structure:
-     ```yaml
-     assistant:
-       name: "Statute of Limitations Import Assistant"
-       instructions: "You are an assistant designed to help with the Statute of Limitations import process."
-       model: "gpt-4-0125-preview"
 
-     initial_message: "Let's start the Statute of Limitations import process."
+```
+assistant:
+  name: "Statute of Limitations Import Assistant"
+  instructions: |
+    You are an AI assistant specializing in the Statute of Limitations (SoL) import process. Your role is to guide and execute the workflow for importing and processing SoL data efficiently and accurately. Follow these guidelines:
 
-     run_timeout: 3600  # 1 hour in seconds
-     poll_interval: 5  # 5 seconds
+    1. Process Overview:
+       - Understand that the SoL import process involves multiple steps, from data retrieval to final import.
+       - Maintain awareness of the overall workflow and how each step contributes to the final goal.
 
-     determine_processing_scope:
-       db_path: "./data/processing_history.db"
+    2. Data Handling:
+       - Treat all data with utmost care and confidentiality.
+       - Ensure data integrity throughout the process, especially during file operations and calculations.
 
-     clean_workspace:
-       archive_directory: "./data/archive"
-       file_types: ["csv", "txt", "xlsx", "log", "old", "docx", "sql", "err", "aud"]
+    3. Error Handling:
+       - Anticipate potential issues at each step and provide guidance on error resolution.
+       - If an error occurs, analyze its impact on the overall process and suggest appropriate actions.
 
-     retrieve_new_input_files:
-       source_directory: "T:/EDISHARE/NEW CLAIMS/2024"
-       destination_directory: "./data/temp"
+    4. Decision Making:
+       - When faced with choices, consider the implications on data accuracy, processing time, and system resources.
+       - Justify your decisions based on the specific context of the SoL import task.
 
-     consolidate_input_files:
-       input_directory: "./data/temp"
-       output_file: "./data/temp/NCR_combined_output.xlsx"
-       file_pattern: "NCR*.xlsx"
+    5. Optimization:
+       - Continuously look for opportunities to improve the process efficiency.
+       - Suggest optimizations when you identify potential bottlenecks or redundancies.
 
-     calculate_statute_of_limitations:
-       input_file: "./data/temp/NCR_combined_output.xlsx"
-       output_file: "./data/temp/output_data.csv"
-       state_laws_file: "./data/state_sol_laws.json"
+    6. Compliance:
+       - Ensure all operations comply with relevant laws and regulations regarding SoL and data handling.
+       - Flag any potential compliance issues you notice during the process.
 
-     generate_input_files:
-       sol_data_file: "./data/temp/output_data.csv"
-       utimphis_output: "./data/output/utimphis.csv"
-       imdiary_output: "./data/output/imdiary.csv"
-       lcimp002_output: "./data/output/lcimp002.csv"
+    7. Documentation:
+       - Keep clear records of actions taken, decisions made, and any anomalies encountered.
+       - Prepare concise yet comprehensive summaries at key points in the process.
 
-     process_input_files:
-       acuthin_path: "\\\\THINCLIENT\\thinclient\\acuthin.exe"
-       log_file: "./logs/import_log.txt"
+    8. User Interaction:
+       - Provide clear, step-by-step guidance when user input is required.
+       - Explain complex concepts or calculations in simple terms when necessary.
 
-     copy_to_lcs_data:
-       source_directory: "./data/output"
-       destination_drive: "U:"
-       network_path: "\\\\thinclient\\cp\\lcs_data"
-       files_to_copy: ["utimphis.csv", "imdiary.csv", "lcimp002.csv"]
+    9. Tool Usage:
+       - Utilize the provided tools effectively, understanding the purpose and limitations of each.
+       - Combine tools creatively when needed to solve complex problems.
 
-     update_processing_history:
-       db_path: "./data/processing_history.db"
-     ```
+    Remember, your primary goal is to ensure a smooth, accurate, and efficient SoL import process while maintaining data integrity and compliance.
+
+  model: "gpt-4-0125-preview"
+
+initial_message: |
+  Welcome to the Statute of Limitations Import Process. I'm here to guide you through each step of this complex task. We'll begin by determining the scope of our processing, then move through data retrieval, consolidation, SoL calculation, and finally, data import and record updating. If you have any questions or concerns at any point, please don't hesitate to ask. Let's start by determining our processing scope. Shall we proceed?
+
+run_timeout: 3600  # 1 hour in seconds
+poll_interval: 5  # 5 seconds
+
+determine_processing_scope:
+  db_path: "./data/processing_history.db"
+  description: |
+    This step involves querying the processing history database to determine the date range for the current import. Consider the following:
+    - Check the most recent processing date in the database.
+    - Propose a date range from the day after the last processed date to the current date.
+    - If no previous processing date exists, prompt the user for a start date.
+    - Confirm the proposed date range with the user before proceeding.
+
+clean_workspace:
+  archive_directory: "./data/archive"
+  file_types: ["csv", "txt", "xlsx", "log", "old", "docx", "sql", "err", "aud"]
+  description: |
+    Prepare the workspace for new data processing:
+    - Move all files of specified types to a timestamped archive folder.
+    - Ensure the workspace is clean to prevent mixing of old and new data.
+    - Confirm successful archiving of all relevant files before proceeding.
+
+retrieve_new_input_files:
+  source_directory: "T:/EDISHARE/NEW CLAIMS/2024"
+  destination_directory: "./data/temp"
+  description: |
+    Retrieve new input files for processing:
+    - Scan the source directory for files matching the NCR*.xlsx pattern.
+    - Copy only files within the determined date range.
+    - Verify file integrity after copying.
+    - Report the number and names of files retrieved.
+
+consolidate_input_files:
+  input_directory: "./data/temp"
+  output_file: "./data/temp/NCR_combined_output.xlsx"
+  file_pattern: "NCR*.xlsx"
+  description: |
+    Combine all retrieved input files into a single consolidated file:
+    - Read all Excel files matching the specified pattern.
+    - Ensure consistent column structure across all files.
+    - Handle any data discrepancies or formatting issues.
+    - Produce a single, clean, consolidated Excel file for further processing.
+
+calculate_statute_of_limitations:
+  input_file: "./data/temp/NCR_combined_output.xlsx"
+  output_file: "./data/temp/output_data.csv"
+  state_laws_file: "./data/state_sol_laws.json"
+  description: |
+    Calculate Statute of Limitations dates for each record:
+    - Load state-specific SoL laws from the JSON file.
+    - For each record, determine the applicable state law.
+    - Calculate the SoL date based on the contract date or charge-off date.
+    - Handle edge cases such as leap years or invalid dates.
+    - Output the results to a CSV file for further processing.
+
+generate_input_files:
+  sol_data_file: "./data/temp/output_data.csv"
+  utimphis_output: "./data/output/utimphis.csv"
+  imdiary_output: "./data/output/imdiary.csv"
+  lcimp002_output: "./data/output/lcimp002.csv"
+  description: |
+    Generate system-specific input files from the calculated SoL data:
+    - Create utimphis.csv for the main system update.
+    - Generate imdiary.csv for diary entries related to SoL.
+    - Produce lcimp002.csv for additional system updates.
+    - Ensure all generated files adhere to the required format for each system.
+
+process_input_files:
+  acuthin_path: "\\\\THINCLIENT\\thinclient\\acuthin.exe"
+  log_file: "./logs/import_log.txt"
+  description: |
+    Execute the acuthin.exe program to process the generated input files:
+    - Ensure network access to the acuthin.exe location.
+    - Run acuthin.exe with appropriate parameters for each input file.
+    - Monitor the execution and capture all output in the log file.
+    - Analyze the log file for any errors or warnings post-execution.
+
+copy_to_lcs_data:
+  source_directory: "./data/output"
+  destination_drive: "U:"
+  network_path: "\\\\thinclient\\cp\\lcs_data"
+  files_to_copy: ["utimphis.csv", "imdiary.csv", "lcimp002.csv"]
+  description: |
+    Copy the processed files to the LCS data directory:
+    - Map the network drive if not already mapped.
+    - Copy each file to the destination, overwriting existing files if necessary.
+    - Verify the integrity of copied files.
+    - Ensure proper permissions are maintained during the copy process.
+
+update_processing_history:
+  db_path: "./data/processing_history.db"
+  description: |
+    Update the processing history database with details of the current run:
+    - Record the processing date, number of files processed, and records affected.
+    - Generate a summary of the import process, including any notable events or issues.
+    - Ensure the database is properly updated to inform future processing runs.
+
+error_handling:
+  max_retries: 3
+  retry_delay: 60  # seconds
+  description: |
+    Guidelines for handling errors during the process:
+    - Implement a retry mechanism for transient errors (e.g., network issues).
+    - Log all errors with detailed context for troubleshooting.
+    - For critical errors, pause the process and seek user intervention.
+    - Provide clear error messages and suggested actions for resolution.
+
+reporting:
+  summary_file: "./logs/import_summary.txt"
+  notification_email: "admin@example.com"
+  description: |
+    Generate comprehensive reports and notifications:
+    - Create a detailed summary of the entire import process.
+    - Highlight key statistics, any issues encountered, and resolutions applied.
+    - Send email notifications for process completion or critical errors.
+    - Maintain an audit trail of all significant actions and decisions.
+
+```
 
 3.2. Adjust paths and settings according to your specific setup.
 
