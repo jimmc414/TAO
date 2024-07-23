@@ -1,5 +1,24 @@
-# Generic Task Automation Orchestrator Agent (Tao Agent) 
-- using OpenAI Assistants API and function calling
+# Task Automation Orchestrator Agent (TAO Agent)
+
+The Task Automation Orchestrator Agent (TAO Agent) is a configurable Python-based system designed to automate complex, multi-step workflows. While it's built to be adaptable to various tasks, this specific implementation focuses on automating the Statute of Limitations (SoL) data import and processing workflow.
+
+Core concepts:
+- Provides a flexible framework for defining and executing sequences of tasks
+- Uses YAML configuration files to specify workflow steps and parameters
+- Integrates with OpenAI API for decision-making support during task execution
+- using OpenAI Assistants API and function calling for custom python Tools
+
+Current implementation:
+This specific version of TAO Agent is configured to handle the SoL (Statute of Limitations) data processing workflow, which includes:
+1. Retrieving new input files from specified locations
+2. Consolidating data from multiple sources
+3. Calculating SoL dates based on state-specific rules
+4. Generating output files for different systems
+5. Running external programs to import SoL data into databases
+6. Copying final data to specified network locations
+
+The system manages error handling, logging, and provides completion notifications throughout the process. While currently set up for SoL processing, the underlying architecture can be easily adapted to orchestrate other complex, multi-step tasks by modifying the configuration and adding task-specific modules. 
+
 
 ## Architectural Diagram
 https://github.com/jimmc414/TAO/blob/master/architectural_diagram.md
