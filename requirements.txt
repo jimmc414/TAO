@@ -1,0 +1,13 @@
+openai
+PyYAML
+pandas
+python-dateutil
+numpy
+openpyxl
+SQLAlchemy
+requests
+tqdm
+python-dotenv
+aiofiles
+asyncio
+typing-extensions
