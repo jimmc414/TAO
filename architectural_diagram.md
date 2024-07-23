@@ -1,6 +1,6 @@
-# Task Automation Orchestrator Agent (TAO Agent) Architectural Design
+# Task Automation Orchestrator Agent (TAO Agent) Architectural Diagram
 
-## Purpose and Overview
+## Purpose 
 
 The Task Automation Orchestrator Agent (TAO Agent) is designed to create a sophisticated, AI-driven orchestration system capable of managing and coordinating complex Python-based tasks. Its primary goal is to execute multifaceted workflows completely, efficiently, and with full transparency, particularly focusing on the Statute of Limitations (SoL) import process.
 
