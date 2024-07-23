@@ -43,20 +43,22 @@ https://github.com/jimmc414/TAO/blob/master/sequence_diagram.md
 
 1.1. Ensure Python 3.8+ is installed on your system.
 1.2. Set up a virtual environment:
-     ```
-     python -m venv venv
-     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-     ```
+
+```
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
+
 1.3. Install required packages:
 
 ```
-     pip install openai PyYAML pandas python-dateutil numpy openpyxl SQLAlchemy requests tqdm python-dotenv aiofiles asyncio typing-extensions
+pip install openai PyYAML pandas python-dateutil numpy openpyxl SQLAlchemy requests tqdm python-dotenv aiofiles asyncio typing-extensions
 ```
 
  or
  
  ```
-     pip install -r requirements.txt
+ pip install -r requirements.txt
  ```
 		 
 1.4. Set your OpenAI API key as an environment variable:
