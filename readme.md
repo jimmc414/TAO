@@ -21,6 +21,11 @@
      ```
      export OPENAI_API_KEY=your_api_key_here
      ```
+     or for Windows
+     ```
+     setx OPENAI_API_KEY=your_api_key_here
+     ```
+
 
 ## 2. Project Structure
 
