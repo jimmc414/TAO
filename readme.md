@@ -1,4 +1,4 @@
-# (Generic) Task Automation Orchestrator Agent (Tao Agent) 
+# Generic Task Automation Orchestrator Agent (Tao Agent) 
 - using OpenAI Assistants API and function calling
 
 ## Architectural Diagram
