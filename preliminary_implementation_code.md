@@ -1,6 +1,3 @@
-Certainly. I'll update the code to address these issues while retaining all the original functionality. Here's the revised version of the `main.py` file:
-
-```python
 import os
 from openai import OpenAI
 from time import sleep
