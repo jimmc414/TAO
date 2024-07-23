@@ -48,13 +48,16 @@ https://github.com/jimmc414/TAO/blob/master/sequence_diagram.md
      source venv/bin/activate  # On Windows use `venv\Scripts\activate`
      ```
 1.3. Install required packages:
-   	 ```
+
+```
      pip install openai PyYAML pandas python-dateutil numpy openpyxl SQLAlchemy requests tqdm python-dotenv aiofiles asyncio typing-extensions
-     ```
-	or
-   	 ```
+```
+
+ or
+ 
+ ```
      pip install -r requirements.txt
-     ```
+ ```
 		 
 1.4. Set your OpenAI API key as an environment variable:
      ```
