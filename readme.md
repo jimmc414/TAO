@@ -1,6 +1,17 @@
+# Task Automation Orchestrator Agent (Tao Agent) 
+- using OpenAI Assistants API and function calling
+
 ## Architectural Diagram
 https://github.com/jimmc414/TAO/blob/master/architectural_diagram.md
 
+## Data Flow Diagram
+https://github.com/jimmc414/TAO/blob/master/data_flow_diagram.md
+
+## Sequence Diagram
+https://github.com/jimmc414/TAO/blob/master/sequence_diagram.md
+
+## Call Graph
+[https://github.com/jimmc414/TAO/blob/master/sequence_diagram.md](https://github.com/jimmc414/TAO/blob/master/call_graph.md)
 
 # TAO Agent Implementation Guide
 
