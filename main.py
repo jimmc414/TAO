@@ -1,4 +1,3 @@
-```python
 import os
 from openai import OpenAI
 from time import sleep
@@ -479,5 +478,4 @@ def main():
             logger.info(f"Assistant's final message: {message.content[0].text.value}")
 
 if __name__ == "__main__":
-    main()	
-```
+    main()
