@@ -1,3 +1,7 @@
+## Architectural Diagram
+https://github.com/jimmc414/TAO/blob/master/architectural_diagram.md
+
+
 # TAO Agent Implementation Guide
 
 ## 1. Environment Setup
