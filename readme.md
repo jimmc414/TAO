@@ -62,13 +62,16 @@ pip install openai PyYAML pandas python-dateutil numpy openpyxl SQLAlchemy reque
  ```
 		 
 1.4. Set your OpenAI API key as an environment variable:
-     ```
-     export OPENAI_API_KEY=your_api_key_here
-     ```
-     or for Windows
-     ```
-     setx OPENAI_API_KEY=your_api_key_here
-     ```
+
+```
+export OPENAI_API_KEY=your_api_key_here
+```
+
+or for Windows
+
+```
+setx OPENAI_API_KEY=your_api_key_here
+```
 
 
 ## 2. Project Structure
